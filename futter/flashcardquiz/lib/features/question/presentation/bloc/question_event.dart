@@ -10,8 +10,8 @@ class GetQuestionsEvent extends QuestionEvent{
 
 
 class CreateQuestionsEvent extends QuestionEvent{
-
-  dynamic data;
+  final QuestionModel  data ;
+  CreateQuestionsEvent({required this.data});
 
 
 

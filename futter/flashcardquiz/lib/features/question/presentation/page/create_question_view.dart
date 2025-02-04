@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../data/models/question_model.dart';
 import '../bloc/question_bloc.dart';
 
 class CreateQuestionPage extends StatelessWidget {
@@ -24,7 +25,19 @@ class CreateQuestionPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
 
-                context.read<QuestionBloc>().add(CreateQuestionsEvent());
+
+                final question = QuestionModel(
+                    id: 0,  // Or the appropriate id if needed
+                    question: 'from android studio',
+                    timeLimit: 50,
+                    createdAt: DateTime.now(),
+                    user: 1,
+                    category: 1,
+                    choices: []  // Add any choices here if needed
+                );
+
+
+                context.read<QuestionBloc>().add(CreateQuestionsEvent(data: question));
               },
               child: Text('Create Question'),
             ),

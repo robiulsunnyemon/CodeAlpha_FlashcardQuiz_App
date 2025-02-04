@@ -1,3 +1,4 @@
+import 'package:flashcardquiz/features/question/presentation/page/question_view/question_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'features/question/presentation/page/question_view.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Clean Architecture',
         theme: ThemeData(primarySwatch: Colors.blue),
-        home: HomePage(),
+        home: QuestionView(),
       ),
     );
   }

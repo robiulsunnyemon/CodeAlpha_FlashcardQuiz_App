@@ -26,14 +26,14 @@ class QuestionPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // ✅ প্রশ্ন দেখানো হচ্ছে
+
                         Text(
                           "Q${index + 1}: ${question.question}",
                           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: 10),
 
-                        // ✅ Choices দেখানোর জন্য ListView.builder (Vertical)
+
                         SizedBox(
                           height: 120,
                           child: ListView.builder(
