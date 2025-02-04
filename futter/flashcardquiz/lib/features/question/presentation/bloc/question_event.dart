@@ -12,7 +12,8 @@ class GetQuestionsEvent extends QuestionEvent{
 class CreateQuestionsEvent extends QuestionEvent{
 
   dynamic data;
-  CreateQuestionsEvent({required this.data});
+
+
 
 
   @override

@@ -23,13 +23,8 @@ class CreateQuestionPage extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                final data = {
-                  'question': titleController.text,
-                  'user':1,
-                  'category':1
 
-                };
-                context.read<QuestionBloc>().add(CreateQuestionsEvent(data: data));
+                context.read<QuestionBloc>().add(CreateQuestionsEvent());
               },
               child: Text('Create Question'),
             ),

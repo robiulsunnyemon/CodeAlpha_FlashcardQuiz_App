@@ -1,3 +1,4 @@
+import 'package:flashcardquiz/features/question/data/models/question_model.dart';
 import 'package:flashcardquiz/features/question/domain/use_cases/create_question.dart';
 import 'package:flashcardquiz/features/question/domain/use_cases/delete_question.dart';
 import 'package:flashcardquiz/features/question/domain/use_cases/update_question.dart';
@@ -37,6 +38,8 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
     on<CreateQuestionsEvent>((event, emit) async {
       emit(QuestionLoading());
       final result = await createQuestion(event.data);
+      print("result");
+      print(result);
       result.fold(
             (failure) => emit(QuestionError("Failed to create question")),
             (question) => emit(QuestionCreated()),
