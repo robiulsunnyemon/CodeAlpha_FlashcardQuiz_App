@@ -1,7 +1,18 @@
-import 'package:flashcardquiz/features/question/presentation/page/question_view/question_view.dart';
+
+
+
+import 'package:flashcardquiz/features/auth/features/signup/bloc/signup_bloc.dart';
+import 'package:flashcardquiz/features/leaderboard/presentation/bloc/leader_board_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'features/question/presentation/page/question_view.dart';
+import 'config/routes/routes.dart';
+import 'config/routes/routes_name.dart';
+import 'features/auth/auth_bloc/auth_bloc.dart';
+import 'features/auth/features/sign_in/bloc/bloc.dart';
+import 'features/auth/features/signup/page/sign_up.dart';
+import 'features/auth/features/splash/presentation/bloc/splash_bloc.dart';
+import 'features/bottom_navbar/presentation/bloc/bottom_navbar_bloc.dart';
+import 'features/bottom_navbar/presentation/view/BottomNavbar.dart';
 import 'injection_container.dart' as di;
 import 'features/question/presentation/bloc/question_bloc.dart';
 
@@ -13,37 +24,27 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => di.sl<QuestionBloc>()),
+        BlocProvider(create: (context) => di.sl<QuestionBloc>()),
+        BlocProvider(create: (context) => BottomNavbarBloc()),
+        BlocProvider(create: (context) => di.sl<LeaderBoardBloc>()),
+        BlocProvider(create: (context) => di.sl<SignupBloc>()),
+        BlocProvider(create: (context) => di.sl<LoginBloc>()),
+        BlocProvider(create: (context) => SplashBloc()..add(StartSplash())),
+        BlocProvider(create: (context) => AuthBloc()..add(CheckAuth())),
       ],
       child: MaterialApp(
         title: 'Flutter Clean Architecture',
         theme: ThemeData(primarySwatch: Colors.blue),
-        home: QuestionView(),
-      ),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Home')),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => QuestionPage()));
-            },
-            child: Text("Go to Questions"),
-          ),
-        ],
+        debugShowCheckedModeBanner: false,
+        home: RegistrationScreen(),
+        initialRoute: RoutesName.loginView,
+        onGenerateRoute: Routes.generateRoute,
       ),
     );
   }

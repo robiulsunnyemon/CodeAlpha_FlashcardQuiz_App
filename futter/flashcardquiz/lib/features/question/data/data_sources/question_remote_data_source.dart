@@ -24,4 +24,12 @@ class QuestionRemoteDataSource {
   Future<void> deleteQuestion(int id) async {
     await apiService.deleteRequest('questions/$id/');
   }
+
+
+  Future<AnswerQuestionModel> createAnswerQuestion(AnswerQuestionModel answerQuestionModel) async {
+    final response = await apiService.postRequest('question_answers/', answerQuestionModel.toJson());
+    return AnswerQuestionModel.fromJson(response.data);
+  }
+
+
 }

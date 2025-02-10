@@ -55,6 +55,7 @@ dependencies:
 
   # JSON Serialization
   json_annotation: ^4.9.0
+  shared_preferences: ^2.5.1
 
 
 dev_dependencies:

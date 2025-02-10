@@ -1,8 +1,17 @@
+
 from django.shortcuts import render
 from rest_framework import viewsets
 from .models import Question,Choice,QuestionAnswer,Categoryquestion,CategoryBlog,Blog,UserDetails
-from .serializers import QuestionSerializer,ChoiceSerializer,QuestionAnswerSerializer,CategoryquestionSerializer,CategoryBlogSerializer,BlogSerializer,UserDetailsSerializer
+from .serializers import QuestionSerializer,ChoiceSerializer,QuestionAnswerSerializer,CategoryquestionSerializer,CategoryBlogSerializer,BlogSerializer,UserDetailsSerializer,RegisterSerializer
 from rest_framework.decorators import api_view
+from rest_framework.views import APIView
+from rest_framework import generics
+from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.views import ObtainAuthToken
+from django.contrib.auth.models import User
+
+
+
 from rest_framework.response import Response
 from django.db.models import Sum
 
@@ -97,3 +106,15 @@ def choice_by_question_id(request, question_id):
     serializer = ChoiceSerializer(option, many=True)
     return Response(serializer.data)
 
+
+## user management
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer
+
+class LoginView(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        token = Token.objects.get(key=response.data['token'])
+        return Response({'token': token.key, 'user_id': token.user_id, 'username': token.user.username})

@@ -66,58 +66,34 @@ class QuestionModel extends Question {
 
 
 
-//new model
+class AnswerQuestionModel extends AnswerQuestion {
+  const AnswerQuestionModel({
+    required super.id,
+    required super.isCorrect,
+    required super.score,
+    required super.user,
+    required super.question,
+    required super.selectedChoice,
+  });
 
-// class QuestionModel extends Question {
-//   const QuestionModel({
-//     required int id,
-//     required String question,
-//     required int timeLimit,
-//     required DateTime createdAt,
-//     required int user,
-//     required int category,
-//     required List<Choice> choices,
-//   }) : super(
-//     id: id,
-//     question: question,
-//     timeLimit: timeLimit,
-//     createdAt: createdAt,
-//     user: user,
-//     category: category,
-//     choices: choices,
-//   );
-//
-//   Map<String, dynamic> toJson() {
-//     return {
-//       'question': question,
-//       'time_limit': timeLimit,
-//       'user': user,
-//       'category': category,
-//     };
-//   }
-// }
-//
-// class ChoiceModel extends Choice {
-//   const ChoiceModel({
-//     required int id,
-//     required String option,
-//     required bool isCorrect,
-//     required int user,
-//     required int question,
-//   }) : super(
-//     id: id,
-//     option: option,
-//     isCorrect: isCorrect,
-//     user: user,
-//     question: question,
-//   );
-//
-//   Map<String, dynamic> toJson() {
-//     return {
-//       'option': option,
-//       'is_correct': isCorrect,
-//       'user': user,
-//       'question': question,
-//     };
-//   }
-// }
+  // ✅ Factory method for JSON deserialization
+  factory AnswerQuestionModel.fromJson(Map<String, dynamic> json) {
+    return AnswerQuestionModel(
+      id: json['id'],
+      isCorrect: json['is_correct'],
+      score: json['score'],
+      user: json['user'],
+      question: json['question'],
+      selectedChoice: json['selected_choice'],
+    );
+  }
+
+  // ✅ Method to convert to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      "user": user,
+      "question": question,
+      "selected_choice": selectedChoice,
+    };
+  }
+}

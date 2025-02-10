@@ -1,3 +1,5 @@
+
+
 """
 URL configuration for hellolearning project.
 
@@ -19,14 +21,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path,include
-from tutor.views import QuestionViewSet,ChoiceViewSet,QuestionAnswerViewSet,CategoryquestionViewSet,student_leaderboard,CategoryBlogViewSet,UserDetailsViewSet,BlogViewSet,blogs_by_category,questions_by_category,choice_by_question_id
+from tutor.views import QuestionViewSet,ChoiceViewSet,QuestionAnswerViewSet,CategoryquestionViewSet,student_leaderboard,CategoryBlogViewSet,UserDetailsViewSet,BlogViewSet,blogs_by_category,questions_by_category,choice_by_question_id,RegisterView,LoginView
 
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register('questions', QuestionViewSet)
 router.register('choices', ChoiceViewSet)
-router.register('question_answer', QuestionAnswerViewSet)
+router.register('question_answers', QuestionAnswerViewSet)
 router.register('question_categories', CategoryquestionViewSet)
 router.register('blog_catagories',CategoryBlogViewSet)
 router.register('user_details',UserDetailsViewSet)
@@ -39,7 +41,10 @@ urlpatterns = [
     path('api/student_leaderboard/', student_leaderboard, name='student_leaderboard'),
     path('api/questions/category/<int:category_id>/', questions_by_category, name='questions_by_category'),
     path('api/blog/category/<int:category_id>/', blogs_by_category, name='blogs_by_category'),
-     path('api/choices/question/<int:question_id>/', choice_by_question_id, name='choice_by_question_id')
+    path('api/choices/question/<int:question_id>/', choice_by_question_id, name='choice_by_question_id'),
+    path('api/auth/signup/', RegisterView.as_view(), name='signup'),
+    path('api/auth/login/', LoginView.as_view(), name='login'),
+
 ]
 
 

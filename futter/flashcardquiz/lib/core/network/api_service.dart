@@ -1,7 +1,16 @@
+
 import 'package:dio/dio.dart';
 
 class ApiService {
-  final Dio _dio = Dio(BaseOptions(baseUrl: 'http://192.168.0.109:8000/api/'));
+  final Dio _dio = Dio(
+      BaseOptions(
+        baseUrl: 'http://192.168.0.110:8000/api/',
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Authorization': 'Bearer YOUR_TOKEN', // যদি Auth token লাগে
+        },
+      ),
+  );
 
   Future<Response> getRequest(String endpoint) async {
     return await _dio.get(endpoint);

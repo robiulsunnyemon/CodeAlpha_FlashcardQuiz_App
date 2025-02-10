@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/error/failure.dart';
+import '../../domain/entities/answer/question_answer.dart';
 import '../../domain/entities/question.dart';
 import '../../domain/repositories/question_repository.dart';
 import '../data_sources/question_remote_data_source.dart';
@@ -48,4 +49,15 @@ class QuestionRepositoryImpl implements QuestionRepository {
       return Left(ServerFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, AnswerQuestion>> createAnswerQuestion(AnswerQuestion answerQuestion) async {
+    try {
+      final newQuestionAnswer = await remoteDataSource.createAnswerQuestion(answerQuestion as AnswerQuestionModel);
+      return Right(newQuestionAnswer);
+    } catch (e) {
+      return Left(ServerFailure());
+    }
+  }
+
 }

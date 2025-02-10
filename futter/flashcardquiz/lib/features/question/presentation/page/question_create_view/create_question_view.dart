@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../data/models/question_model.dart';
-import '../bloc/question_bloc.dart';
+import '../../../data/models/question_model.dart';
+import '../../bloc/question_bloc.dart';
 
 class CreateQuestionPage extends StatelessWidget {
   CreateQuestionPage({super.key});
