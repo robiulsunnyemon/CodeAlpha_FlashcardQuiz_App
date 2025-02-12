@@ -3,6 +3,12 @@ import 'package:flashcardquiz/features/auth/data/repositories/user_repo_impl.dar
 import 'package:flashcardquiz/features/auth/domain/use_cases/user_details.dart';
 import 'package:flashcardquiz/features/auth/features/signup/bloc/signup_bloc.dart';
 import 'package:flashcardquiz/features/auth/features/user_details/bloc/user_details_bloc.dart';
+import 'package:flashcardquiz/features/community/data/data_sources/blog_data_source.dart';
+import 'package:flashcardquiz/features/community/data/repositories/blog_repository_impl.dart';
+import 'package:flashcardquiz/features/community/domain/repositories/blog_repository.dart';
+import 'package:flashcardquiz/features/community/domain/use_cases/create_blog_use_cases.dart';
+import 'package:flashcardquiz/features/community/domain/use_cases/get_blog_use_cases.dart';
+import 'package:flashcardquiz/features/community/presentation/bloc/blog_bloc.dart';
 import 'package:flashcardquiz/features/leaderboard/data/data_sources/leader_board_data_source.dart';
 import 'package:flashcardquiz/features/leaderboard/domain/repositories/leader_board_repository.dart';
 import 'package:flashcardquiz/features/leaderboard/domain/use_cases/get_leader_board.dart';
@@ -53,6 +59,10 @@ Future<void> init() async {
           ()=> UserRemoteDataSource(sl())
   );
 
+  sl.registerLazySingleton<BlogRemoteDataSource>(
+          ()=> BlogRemoteDataSource(sl())
+  );
+
 
 
   // Repositories
@@ -68,6 +78,10 @@ Future<void> init() async {
           ()=>UserRepositoryImpl(sl()),
   );
 
+  sl.registerLazySingleton<BlogRepository>(
+        ()=>BlogRepositoryImpl(sl()),
+  );
+
 
   // Use cases
   sl.registerLazySingleton(() => GetQuestions(sl()));
@@ -79,6 +93,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => SignUp(sl()));
   sl.registerLazySingleton(() => Login(sl()));
   sl.registerLazySingleton(() => GetUserDetails(sl()));
+  sl.registerLazySingleton(() => GetBlogData(sl()));
+  sl.registerLazySingleton(() => CreateBlogData(sl()));
 
 
   // Bloc
@@ -119,6 +135,14 @@ Future<void> init() async {
         getUserDetails: sl()
     ),
   );
+
+  sl.registerFactory(
+        ()=>BlogBloc(
+        getBlogData: sl(),
+        createBlogData: sl()
+    ),
+  );
+
 
 
 }

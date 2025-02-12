@@ -68,7 +68,6 @@ class UserDetailsSerializer(serializers.ModelSerializer):
 
 
 class BlogSerializer(serializers.ModelSerializer):
-    user_details=UserDetailsSerializer(read_only=True)
     class Meta:
         model= Blog
         fields = '__all__'

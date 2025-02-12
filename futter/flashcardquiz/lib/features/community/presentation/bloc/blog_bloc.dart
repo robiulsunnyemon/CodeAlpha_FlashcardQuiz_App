@@ -20,11 +20,10 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
     required this.createBlogData,
   }) : super(BlogInitial()) {
 
-    on<GetBlogData>((event, emit) async {
+    on<GetBlogDataEvent>((event, emit) async {
       emit(BlogLoading());
-
       final result = await getBlogData();
-
+      print(result);
       result.fold(
             (failure) => emit(BlogError(message: failure.toString())),
             (blogs) => emit(BlogLoaded(blogs: blogs)),

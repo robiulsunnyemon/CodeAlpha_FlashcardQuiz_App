@@ -2,7 +2,7 @@ part of 'blog_bloc.dart';
 
 abstract class BlogEvent extends Equatable{}
 
-class GetBlogData extends BlogEvent{
+class GetBlogDataEvent extends BlogEvent{
   @override
   // TODO: implement props
   List<Object?> get props => [];
@@ -10,9 +10,9 @@ class GetBlogData extends BlogEvent{
 }
 
 
-class CreateBlogData extends BlogEvent{
+class CreateBlogDataEvent extends BlogEvent{
   final BlogModel blogData;
-  CreateBlogData({required this.blogData});
+  CreateBlogDataEvent({required this.blogData});
   @override
   // TODO: implement props
   List<Object?> get props => [blogData];

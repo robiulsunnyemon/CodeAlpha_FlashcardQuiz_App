@@ -8,6 +8,8 @@ class BlogRemoteDataSource{
   
   Future<List<BlogModel>> getBlogData() async {
     final response = await apiService.getRequest('blogs/');
+    print("status code: ${response.statusCode}");
+    print("status code: ${response.data}");
     return(response.data as List).map((e) => BlogModel.fromJson(e)).toList();
 
   }

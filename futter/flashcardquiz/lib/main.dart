@@ -3,6 +3,7 @@
 
 import 'package:flashcardquiz/features/auth/features/signup/bloc/signup_bloc.dart';
 import 'package:flashcardquiz/features/auth/features/user_details/bloc/user_details_bloc.dart';
+import 'package:flashcardquiz/features/community/presentation/bloc/blog_bloc.dart';
 import 'package:flashcardquiz/features/leaderboard/presentation/bloc/leader_board_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => di.sl<SignupBloc>()),
         BlocProvider(create: (context) => di.sl<LoginBloc>()),
         BlocProvider(create: (context) => di.sl<UserDetailsBloc>()),
+        BlocProvider(create: (context) => di.sl<BlogBloc>()),
         BlocProvider(create: (context) => SplashBloc()..add(StartSplash())),
         BlocProvider(create: (context) => AuthBloc()..add(CheckAuth())),
       ],

@@ -1,70 +1,42 @@
+
+
 import '../../domain/entities/blog_entity.dart';
 
 class BlogModel extends BlogEntity {
+
+
   BlogModel({
-    super.id,
-    required super.userId,
-    required super.category,
-    required UserDetailsModel super.userDetails,
+    super.id=0,
     required super.title,
     required super.content,
-    super.image,
-    super.createdAt,
-  });
+    super.image= '',
+    required super.userId,
+    required super.userDetailsId,
+    required super.createdAt,
+    required super.category,
 
+});
+
+  // Method to convert BlogModel into a Map for POST request
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'content': content,
+      'user_id': userId,
+      'category': category,
+      'user_details_id': userDetailsId,
+    };
+  }
+
+  // Factory method to create a BlogModel from JSON response
   factory BlogModel.fromJson(Map<String, dynamic> json) {
     return BlogModel(
-      id: json['id'],
-      userId: json['user_id'],
-      category: json['category'],
-      userDetails: UserDetailsModel.fromJson(json['user_details']),
       title: json['title'],
       content: json['content'],
-      image: json['image'],
-      createdAt: json['created_at'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      "user_id": userId,
-      "category": category,
-      "user_details_id": userDetails.userId, // শুধুমাত্র ID পাঠানো হচ্ছে
-      "title": title,
-      "content": content,
-      "image": image,
-    };
-  }
-}
-
-class UserDetailsModel extends UserDetailsEntity {
-  UserDetailsModel({
-    required super.userId,
-    required super.firstName,
-    required super.lastName,
-    super.country,
-    super.phoneNumber,
-    super.createdAt,
-  });
-
-  factory UserDetailsModel.fromJson(Map<String, dynamic> json) {
-    return UserDetailsModel(
       userId: json['user_id'],
-      firstName: json['firstName'],
-      lastName: json['lastName'],
-      country: json['country'],
-      phoneNumber: json['phoneNumber']?.toString(),
-      createdAt: json['created_at'],
+      category: json['category'],
+      userDetailsId: json['user_details_id'],
+      createdAt: json['createdAt'],
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      "user_id": userId,
-      "firstName": firstName,
-      "lastName": lastName,
-      "country": country,
-      "phoneNumber": phoneNumber,
-    };
   }
 }

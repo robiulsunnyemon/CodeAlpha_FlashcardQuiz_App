@@ -26,6 +26,7 @@ class BlogRepositoryImpl extends BlogRepository {
       final blogs = await blogRemoteDataSource.getBlogData();
       return Right(blogs);
     } catch (e) {
+      print("API Error: $e");
       return Left(ServerFailure());
     }
   }
