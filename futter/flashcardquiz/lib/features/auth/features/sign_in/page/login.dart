@@ -1,11 +1,12 @@
 
+import 'package:flashcardquiz/config/local_storage/local_storage.dart';
 import 'package:flashcardquiz/features/auth/data/models/login_user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../config/routes/routes_name.dart';
 import '../../signup/bloc/signup_bloc.dart';
-import '../bloc/bloc.dart';
+import '../bloc/login_bloc.dart';
 
 
 class LoginScreen extends StatefulWidget {
@@ -21,15 +22,24 @@ class LoginScreenState extends State<LoginScreen> {
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Color(0xff12CBC4),
       body: BlocListener<LoginBloc, LoginState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is LoginSuccess) {
+            final firstName=await SharedPrefsHelper.getFirstName();
+            if(context.mounted){
+              if(firstName!="null"){
+                Navigator.pushReplacementNamed(context, RoutesName.questionView);
+              }else{
+                Navigator.pushReplacementNamed(context, RoutesName.userDetailsView);
+              }
+            }
 
-            Navigator.pushReplacementNamed(context, RoutesName.questionView);
           } else if (state is LoginFailure) {
 
 
@@ -68,12 +78,12 @@ class LoginScreenState extends State<LoginScreen> {
                           filled: true,
                           fillColor: Colors.white,
                         ),
-                        // validator: (value) {
-                        //   if (value!.isEmpty) {
-                        //     return 'Please enter your username';
-                        //   }
-                        //   return null;
-                        // },
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter your username';
+                          }
+                          return null;
+                        },
                       ),
                       SizedBox(height: 15),
                       SizedBox(height: 15),
@@ -88,12 +98,12 @@ class LoginScreenState extends State<LoginScreen> {
                           filled: true,
                           fillColor: Colors.white,
                         ),
-                        // validator: (value) {
-                        //   if (value!.isEmpty || value.length < 6) {
-                        //     return 'Password must be at least 6 characters';
-                        //   }
-                        //   return null;
-                        // },
+                        validator: (value) {
+                          if (value!.isEmpty || value.length < 6) {
+                            return 'Password must be at least 6 characters';
+                          }
+                          return null;
+                        },
                       ),
                       SizedBox(height: 25),
                       SizedBox(
@@ -103,28 +113,17 @@ class LoginScreenState extends State<LoginScreen> {
                             return ElevatedButton(
                               onPressed: () {
 
-                                // if (_formKey.currentState!.validate()) {
-                                //   final loginData= LoginUserModel(
-                                //       username: "khann",
-                                //       password: "khan1234",
-                                //       token: '',
-                                //       user_id: ''
-                                //   );
-                                //
-                                //   context.read<LoginBloc>().add(LoginSubmitted(loginData: loginData));
-                                // }
+                                if (_formKey.currentState!.validate()) {
+                                  final loginData= LoginUserModel(
+                                      username: _userNameController.text.trim(),
+                                      password: _passwordController.text.trim(),
+                                      token: '',
+                                      userId: 1
+                                  );
 
-                                print("tapped");
+                                  context.read<LoginBloc>().add(LoginSubmitted(loginData: loginData));
+                                }
 
-                                final loginData= LoginUserModel(
-                                    username: "khann",
-                                    password: "khan1234",
-                                    userId: 1,
-                                    token: '',
-
-                                );
-
-                                context.read<LoginBloc>().add(LoginSubmitted(loginData: loginData));
 
                               },
                               style: ElevatedButton.styleFrom(
@@ -150,13 +149,20 @@ class LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(height: 30),
-                Text(
-                  'If you have not account? Signup',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                    decoration: TextDecoration.underline,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'If you have not account?',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                    TextButton(onPressed: (){
+                      Navigator.pushNamed(context, RoutesName.signUpView);
+                    }, child: Text("Signup",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),)
+                  ],
                 ),
               ],
             ),

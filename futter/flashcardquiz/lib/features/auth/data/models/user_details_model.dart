@@ -9,7 +9,7 @@ class UserDetailsModel extends UserDetailsEntity {
     required super.lastName,
     super.country,
     super.phoneNumber,
-    required super.createdAt,
+    super.createdAt,
   });
 
 

@@ -13,12 +13,6 @@ class LeaderBoardView extends StatefulWidget {
 
 class _LeaderBoardViewState extends State<LeaderBoardView> {
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    context.read<LeaderBoardBloc>().add(GetLeaderEvent());
-  }
 
   @override
   Widget build(BuildContext context) {

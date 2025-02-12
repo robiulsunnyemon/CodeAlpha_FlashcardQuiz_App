@@ -1,6 +1,8 @@
 import 'package:flashcardquiz/features/auth/data/data_sources/user_remote_data_source.dart';
 import 'package:flashcardquiz/features/auth/data/repositories/user_repo_impl.dart';
+import 'package:flashcardquiz/features/auth/domain/use_cases/user_details.dart';
 import 'package:flashcardquiz/features/auth/features/signup/bloc/signup_bloc.dart';
+import 'package:flashcardquiz/features/auth/features/user_details/bloc/user_details_bloc.dart';
 import 'package:flashcardquiz/features/leaderboard/data/data_sources/leader_board_data_source.dart';
 import 'package:flashcardquiz/features/leaderboard/domain/repositories/leader_board_repository.dart';
 import 'package:flashcardquiz/features/leaderboard/domain/use_cases/get_leader_board.dart';
@@ -16,7 +18,7 @@ import 'core/network/api_service.dart';
 import 'features/auth/domain/repositories/user_repository.dart';
 import 'features/auth/domain/use_cases/log_in.dart';
 import 'features/auth/domain/use_cases/sign_up.dart';
-import 'features/auth/features/sign_in/bloc/bloc.dart';
+import 'features/auth/features/sign_in/bloc/login_bloc.dart';
 import 'features/bottom_navbar/presentation/bloc/bottom_navbar_bloc.dart';
 import 'features/leaderboard/data/repositories/leader_repository_impl.dart';
 import 'features/question/data/data_sources/question_remote_data_source.dart';
@@ -76,6 +78,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetLeaderBoard(sl()));
   sl.registerLazySingleton(() => SignUp(sl()));
   sl.registerLazySingleton(() => Login(sl()));
+  sl.registerLazySingleton(() => GetUserDetails(sl()));
 
 
   // Bloc
@@ -111,6 +114,11 @@ Future<void> init() async {
     ),
   );
 
+  sl.registerFactory(
+        ()=>UserDetailsBloc(
+        getUserDetails: sl()
+    ),
+  );
 
 
 }

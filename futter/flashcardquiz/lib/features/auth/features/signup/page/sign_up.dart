@@ -324,13 +324,21 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                 ),
                 SizedBox(height: 30),
-                Text(
-                  'Already have an account? Login',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                    decoration: TextDecoration.underline,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Already Have your Account',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+
+                      ),
+                    ),
+                    TextButton(onPressed: (){
+                      Navigator.pushNamed(context, RoutesName.loginView);
+                    }, child: Text("Login",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),))
+                  ],
                 ),
               ],
             ),

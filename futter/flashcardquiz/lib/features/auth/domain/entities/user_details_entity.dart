@@ -5,7 +5,7 @@ class UserDetailsEntity {
   final String lastName;
   final String? country;
   final int? phoneNumber;
-  final DateTime createdAt;
+  final DateTime? createdAt;
 
   const UserDetailsEntity({
     required this.id,

@@ -1,3 +1,4 @@
+import 'package:flashcardquiz/config/local_storage/local_storage.dart';
 import 'package:flashcardquiz/config/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,9 +10,15 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<SplashBloc, SplashState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is SplashLoaded) {
-          Navigator.pushReplacementNamed(context, RoutesName.signUpView);
+          final token=await SharedPrefsHelper.getToken();
+          if (!context.mounted) return;
+          if(token!="null"){
+            Navigator.pushReplacementNamed(context, RoutesName.bottomNavBar);
+          }else{
+            Navigator.pushReplacementNamed(context, RoutesName.loginView);
+          }
         }
       },
       child: Scaffold(

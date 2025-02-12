@@ -25,11 +25,7 @@ class _QuestionViewState extends State<QuestionView> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    context.read<QuestionBloc>().add(GetQuestionsEvent());
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,41 +39,55 @@ class _QuestionViewState extends State<QuestionView> {
           )
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 400,
-            child: BlocBuilder<QuestionBloc, QuestionState>(
-              builder: (context, state) {
-                if (state is QuestionLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (state is QuestionLoaded) {
-                  return PageView.builder(
-                    controller: _pageController,
-                    itemCount: state.questions.length,
-                    itemBuilder: (context, index) {
-                      final question = state.questions[index];
-
-                      return buildQuestionCard(question, state);
-                    },
-                  );
-                } else if (state is QuestionError) {
-                  return const Center(child: Text("Error Occurred"));
-                } else {
-                  return const Center(child: Text("No Data Available"));
-                }
-              },
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: 30,),
+            SizedBox(
+              height: 400,
+              child: BlocBuilder<QuestionBloc, QuestionState>(
+                builder: (context, state) {
+                  if (state is QuestionLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is QuestionLoaded) {
+                    return PageView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      controller: _pageController,
+                      itemCount: state.questions.length,
+                      itemBuilder: (context, index) {
+                        final question = state.questions[index];
+        
+                        return buildQuestionCard(question, state);
+                      },
+                    );
+                  } else if (state is QuestionError) {
+                    return const Center(child: Text("Error Occurred"));
+                  } else {
+                    return const Center(child: Text("No Data Available"));
+                  }
+                },
+              ),
             ),
-          ),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: scrollToNextCard,
-            child: const Text("Next Card"),
-          ),
-          const SizedBox(height: 100),
-        ],
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: scrollToNextCard,
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(),
+                    backgroundColor: Color(0xff12CBC4)
+                  ),
+                  child: const Text("Next",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 18),),
+                ),
+              ),
+            ),
+            const SizedBox(height: 100),
+          ],
+        ),
       ),
     );
   }
@@ -113,7 +123,7 @@ class _QuestionViewState extends State<QuestionView> {
                                   itemCount: question.choices.length,
                                   itemBuilder: (context, index) {
                                     final choice = question.choices[index];
-                                    print(choice);
+
                                     return Container(
                                       margin: const EdgeInsets.symmetric(
                                           vertical: 5),

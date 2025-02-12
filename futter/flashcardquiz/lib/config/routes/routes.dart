@@ -1,7 +1,9 @@
 
 
 import 'package:flashcardquiz/config/routes/routes_name.dart';
+import 'package:flashcardquiz/features/auth/features/user_details/page/user_details.dart';
 import 'package:flashcardquiz/features/bottom_navbar/presentation/view/BottomNavbar.dart';
+import 'package:flashcardquiz/features/community/presentation/page/blog_view.dart';
 import 'package:flashcardquiz/features/question/presentation/page/question_view/question_view.dart';
 import 'package:flutter/material.dart';
 
@@ -27,6 +29,17 @@ class Routes {
 
       case RoutesName.loginView:
         return MaterialPageRoute(builder: (BuildContext context) =>  LoginScreen());
+
+
+      case RoutesName.userDetailsView:
+        return MaterialPageRoute(builder: (BuildContext context) =>  UserDetails());
+
+      case RoutesName.blogView:
+        return MaterialPageRoute(builder: (BuildContext context) =>  BlogView());
+
+
+
+
 
 
       default:

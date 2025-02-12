@@ -14,18 +14,17 @@ class LoginUserModel extends LoginUser{
     required this.token,
   });
 
-  /// API Response থেকে JSON ডাটা নিয়ে UserModel তৈরি করবে
+
   factory LoginUserModel.fromJson(Map<String, dynamic> json) {
     return LoginUserModel(
       username: json['username'],
-      password: "", // Password API response-এ আসে না, তাই খালি রাখা হয়েছে
+      password: "",
       userId: json['user_id'],
       token: json['token'],
     );
   }
 
-  /// JSON-এ রূপান্তর করবে, যা API-তে পাঠানো হবে
-  @override
+
   Map<String, dynamic> toJson() {
     return {
       "username": username,
