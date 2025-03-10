@@ -22,8 +22,8 @@ This is a Django REST Framework (DRF) based API project that provides functional
 
 1. Clone the repository:
    ```sh
-   git clone [https://github.com/robiulsunnyemon/CodeAlpha_FlashcardQuiz_App.git]
-   cd <project-directory> futter
+   git clone https://github.com/robiulsunnyemon/CodeAlpha_FlashcardQuiz_App.git
+   cd backend
    ```
 2. Create a virtual environment and activate it:
    ```sh
