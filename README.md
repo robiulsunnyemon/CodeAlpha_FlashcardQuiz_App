@@ -22,8 +22,8 @@ This is a Django REST Framework (DRF) based API project that provides functional
 
 1. Clone the repository:
    ```sh
-   git clone <repository-url>
-   cd <project-directory>
+   git clone [https://github.com/robiulsunnyemon/CodeAlpha_FlashcardQuiz_App.git]
+   cd <project-directory> futter
    ```
 2. Create a virtual environment and activate it:
    ```sh
@@ -93,6 +93,29 @@ http://127.0.0.1:8000/admin/
 ```
 Use the superuser credentials created earlier to log in.
 
+## Flutter App Integration
+This project is also used as a backend for a Flutter application. The Flutter app follows **Clean Architecture** and uses **Flutter BLoC** for state management.
+
+### Flutter App Features
+- **State Management**: BLoC pattern for efficient state handling.
+- **Modular Architecture**: Clean separation of concerns using Clean Architecture principles.
+- **API Integration**: The app connects with this Django REST API to fetch quiz questions, blogs, and user details.
+
+### Setup Instructions for Flutter
+1. Clone the Flutter app repository:
+   ```sh
+   git clone https://github.com/robiulsunnyemon/CodeAlpha_FlashcardQuiz_App.git
+   cd futter
+   ```
+2. Install dependencies:
+   ```sh
+   flutter pub get
+   ```
+3. Run the app:
+   ```sh
+   flutter run
+   ```
+
 ## Deployment
 - Ensure `DEBUG = False` in `settings.py`
 - Set up a production database (PostgreSQL recommended)
@@ -104,5 +127,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## License
 This project is open-source and available under the MIT License.
-
 
